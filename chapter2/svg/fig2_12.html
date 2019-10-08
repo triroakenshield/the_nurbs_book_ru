@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig2_12</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0, 1, 5, 6, 8, 8, 8, 8];
+        var test = make_Ulegend(U, ["0", "1", "5", "6", "8"]);
+        planeOptions.svgWidth = 520;
+        planeOptions.svgHeight = 220;
+        planeOptions.zero_y = 200;
+        planeOptions.hscale = 50;
+        planeOptions.vscale = 100;
+        var draw = draw_axis(document.getElementById('drawing'), planeOptions, test);
+
+        function DrawPath(span, p, U, k, su, eu) {
+            var sstring = "M", u, tt, x, step = 100;
+            for (var i = su * step; i <= eu * step; i++) {
+                u = i / step;
+                x = NURBSUtils.calcBasisFunctions(span, u, p, U);
+                tt = x[k];
+                if (isNaN(x[k])) { x[k] = 0; }
+                if (tt === Infinity) { x[k] = 1; }
+                sstring = sstring.concat(planeOptions.zero_x + planeOptions.hscale * u, " ", planeOptions.zero_y - planeOptions.vscale * x[k], " ");
+            }
+            return sstring;
+        }
+
+        var span = [3, 4, 5, 9, 10], stroke3 = { color: "black" };
+
+        for (var i = 0; i < 4; i++) {
+            for (var k = 0; k < 4; k++) {
+                draw.path(DrawPath(3 + i, 3, U, k, U[3 + i], U[4 + i])).fill("none").stroke(stroke3);
+            }
+        }
+
+        draw.foreignObject(80, 40).move(18, 50).appendChild("p", { innerText: "`N_{0,3}(u)`" });
+        draw.foreignObject(80, 40).move(30, 80).appendChild("p", { innerText: "`N_{1,3}(u)`" });
+        draw.foreignObject(80, 40).move(80, 110).appendChild("p", { innerText: "`N_{2,3}(u)`" });
+        draw.foreignObject(80, 40).move(190, 100).appendChild("p", { innerText: "`N_{3,3}(u)`" });
+        draw.foreignObject(80, 40).move(280, 90).appendChild("p", { innerText: "`N_{4,3}(u)`" });
+        draw.foreignObject(80, 40).move(340, 105).appendChild("p", { innerText: "`N_{5,3}(u)`" });
+        draw.foreignObject(80, 40).move(410, 60).appendChild("p", { innerText: "`N_{6,3}(u)`" });
+
+    </script>
+
+</body>
+
+</html>

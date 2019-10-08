@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig4_4</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0.33, 0.66, 1, 1, 1];
+        var P = [new THREE.Vector4(30, 50, 0, 1), new THREE.Vector4(100, 180, 0, 1), new THREE.Vector4(180, 90, 0, 1),
+        new THREE.Vector4(270, 170, 0, 1), new THREE.Vector4(340, 20, 0, 1)];
+
+        var dw = [4, 1, 0.3, 0], p = 2, sstring = "M", C;
+        var stroke1 = { width: 1 }, stroke2 = { width: 1, dasharray: "5,5" }, stroke3 = { color: "black" };
+
+        var draw = SVG(document.getElementById('drawing')).size(400, 200);
+
+        draw.foreignObject(80, 40).move(20, 10).appendChild("p", { innerText: "`P_0`" });
+        draw.foreignObject(80, 40).move(80, 165).appendChild("p", { innerText: "`P_1`" });
+        draw.foreignObject(80, 40).move(160, 40).appendChild("p", { innerText: "`P_2`" });
+        draw.foreignObject(80, 40).move(250, 160).appendChild("p", { innerText: "`P_3`" });
+        draw.foreignObject(80, 40).move(310, 0).appendChild("p", { innerText: "`P_4`" });
+
+        for (var i = 0; i < 5; i++) {
+            draw.circle(6).move(P[i].x - 3, P[i].y - 3).fill('none').stroke(stroke1);
+            sstring = sstring.concat(P[i].x, " ", P[i].y, " ");
+        }
+
+        draw.path(sstring).fill("none").stroke(stroke3);
+
+        for (var k = 0; k < 4; k++) {
+            P[1].w = dw[k];
+
+            for (var j = 3; j < 5; j++) {
+                C = NURBSUtils.calcBSplinePoint(p, U, P, U[j]);
+                if (C.w != 1.0) {                                   C.divideScalar(C.w);                }
+                draw.circle(4).move(C.x - 2, C.y - 2).stroke(stroke1);
+            }
+
+            draw.path(NURBSUtils.DrawPathW(p, U, P, 0, 1)).fill("none").stroke(stroke3);
+        }
+
+        draw.text('4').x(100).y(150);
+        draw.text('1').x(100).y(120);
+        draw.text('3⁄10').x(100).y(90);
+        draw.text('0').x(100).y(50);
+
+    </script>
+
+</body>
+
+</html>

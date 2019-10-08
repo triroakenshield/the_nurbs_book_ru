@@ -1,0 +1,118 @@
+body {
+    width: 600px;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+div.header {
+    text-align: right;
+    font-size: 200%;
+    border-top: 1px solid;
+    /* Линия сверху текста */
+    border-bottom: 1px solid;
+    /* Линия снизу текста */
+    padding: 5px;
+    /* Поля вокруг текста */
+}
+
+div.section {
+    text-indent: 2em;
+    font-size: 120%;
+    padding-top: 50px;
+}
+
+p {
+    text-indent: 2em;
+}
+
+p.sub {
+    text-indent: 0em;
+}
+
+p.formula {
+    text-align: center;
+}
+
+p.formula2 {
+    text-indent: -60px;
+    margin-left: 100px;
+}
+
+p.formula>math {
+    margin-left: 2em;
+}
+
+p.pictxt {
+    margin: 0px;
+}
+
+a {
+    border-spacing: 0px;
+    margin: 0px;
+}
+
+a.nomer {
+    position: relative;
+    /* Абсолютное позиционирование */
+    right: -90px;
+    /* Положение от правого края */
+}
+
+div.formula {
+    height: 200%;
+}
+
+pre {
+    padding-left: 40px;
+}
+
+li {
+    padding: 10px;
+}
+
+li.tire {
+    padding: 3px;
+    list-style-type: none;
+}
+
+li.tire:before {
+    content: "- ";
+    /* Добавляем в качестве маркера символ */
+}
+
+td {
+    padding: 5px;
+    vertical-align: top;
+}
+
+#footer {
+    position: relative;
+    /* Фиксированное положение */
+    left: 0;
+    bottom: 0;
+    /* Левый нижний угол */
+    padding: 1px;
+    /* Поля вокруг текста */
+    text-align: center;
+    background: white;
+    /* Цвет фона */
+    width: 100%;
+    /* Ширина слоя */
+}
+
+footer {
+    position: relative;
+    /* Фиксированное положение */
+    left: 0;
+    bottom: 0;
+    /* Левый нижний угол */
+    padding: 1px;
+    /* Поля вокруг текста */
+    text-align: center;
+    background: white;
+    /* Цвет фона */
+    width: 100%;
+    /* Ширина слоя */
+}

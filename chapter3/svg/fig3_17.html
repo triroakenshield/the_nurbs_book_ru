@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig3_17</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0.4, 0.6, 1, 1, 1];
+        var P = [new THREE.Vector2(50, 250), new THREE.Vector2(100, 150), new THREE.Vector2(210, 150), new THREE.Vector2(240, 250), new THREE.Vector2(290, 200)];
+
+        var draw = SVG(document.getElementById('drawing')).size(500, 380);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black" };
+        var markerArrow = draw.marker(17, 7, function (add) { add.path("M1,6 L16,3.5 L1,1 L1,6").fill("white").stroke(stroke1); }).ref(16, 3.5);
+
+        draw.foreignObject(80, 40).move(40, 245).appendChild("p", { innerText: "`P_0`" });
+        draw.foreignObject(80, 40).move(65, 120).appendChild("p", { innerText: "`P_1`" });
+        draw.foreignObject(80, 40).move(200, 110).appendChild("p", { innerText: "`P_2`" });
+        draw.foreignObject(80, 40).move(210, 230).appendChild("p", { innerText: "`P_3`" });
+        draw.foreignObject(80, 40).move(300, 190).appendChild("p", { innerText: "`P_4`" });
+
+        var sstring = "M", C;
+
+        for (var i = 0; i < 5; i++) {
+            draw.circle(6).move(P[i].x - 3, P[i].y - 3).fill('none').stroke(stroke1);
+            sstring = sstring.concat(P[i].x, " ", P[i].y, " ");
+        }
+     
+        for (var j = 3; j < 5; j++) {
+            C = NURBSUtils.calcBSplinePoint1(2, U, P, U[j]);
+            draw.circle(4).move(C.x - 2, C.y - 2).stroke(stroke1);
+        }
+
+        draw.path(sstring).fill("none").stroke(stroke2);
+        draw.path(NURBSUtils.DrawPath(2, U, P, 0, 1)).fill("none").stroke(stroke2);
+
+        var ck2 = NURBSUtils.CurveDerivsAlg2(2, U, P, 0, 2);
+        var v1 = ck2[2].clone().multiplyScalar(0.1).add(ck2[0]);
+        draw.line(ck2[0].x, ck2[0].y, v1.x, v1.y).stroke(stroke1).marker("end", markerArrow);
+
+        ck2 = NURBSUtils.CurveDerivsAlg2(2, U, P, 1, 2);
+        v1 = ck2[2].clone().multiplyScalar(0.1).add(ck2[0]);
+        draw.line(ck2[0].x, ck2[0].y, v1.x, v1.y).stroke(stroke1).marker("end", markerArrow);
+
+        draw.foreignObject(80, 40).move(90, 330).appendChild("p", { innerText: "`C^{(2)}(0)`" });
+        draw.foreignObject(80, 40).move(330, 60).appendChild("p", { innerText: "`C^{(2)}(1)`" });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+    <style>
+        body {
+            margin: 0px;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="480" height="400">
+        <defs>
+            <marker id="markerArrow" markerHeight="7" markerWidth="17" orient="auto" refX="0" refY="3.5">
+                <path fill="none" stroke="black" stroke-width="1" d="M1,6 L16,3.5 L1,1 L1,6" />
+            </marker>
+        </defs>
+        <image width="480" height="400" x="0" y="0" xlink:href="../../svg/plane_xy.svg" />
+        <g transform="translate(250,250) scale(100)">
+            <circle cx="0" cy="0" r="1" fill="none" stroke="black" stroke-width=".01" />
+            <line x1="1" x2="1" y1="0" y2="-.83" stroke="black" stroke-width=".01" marker-end="url(#markerArrow)" />
+            <line x1="1" x2="1" y1="-.95" y2="-1.83" stroke="black" stroke-width=".01" marker-end="url(#markerArrow)" />
+            <line x1="0" x2="-.83" y1="-1" y2="-1" stroke="black" stroke-width=".01" marker-end="url(#markerArrow)" />
+        </g>
+        <switch>
+            <foreignObject width="200" height="80" x="355" y="150">
+                <p>`C'(u=0)`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="200" height="80" x="355" y="50">
+                <p>`C'(t=0)`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="200" height="80" x="50" y="110">
+                <p>`C'(u=1)=C'(t=1)`</p>
+            </foreignObject>
+        </switch>
+    </svg>
+
+</body>
+
+</html>

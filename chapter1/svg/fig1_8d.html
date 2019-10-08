@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <svg width="400" height="400" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <marker id="markerArrow" markerWidth="17" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                <path d="M1,6 L16,3.5 L1,1 L1,6" stroke="black" stroke-width="1" fill="none" />
+            </marker>
+        </defs>
+        <circle cx="110" cy="250" r="3" fill="none" stroke="black" />
+        <circle cx="210" cy="250" r="3" fill="none" stroke="black" />
+        <path d="M120 120 140 120 135 115 M135 125 140 120" stroke="black" fill="transparent"/>
+        <path d="M110 250 C 250 50 50 50 210 250" stroke="black" fill="transparent"/>
+        <line x1="110" y1="250" x2="230" y2="80" stroke="black" marker-end="url(#markerArrow)" />
+        <line x1="210" y1="250" x2="330" y2="380" stroke="black" marker-end="url(#markerArrow)" />
+        <text x="70" y="123" style="font-family: Cambria Math;">петля</text>	
+        <text x="180" y="360">(d)</text>
+    </svg>
+</body>
+
+</html>

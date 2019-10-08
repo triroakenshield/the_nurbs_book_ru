@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig2_10a</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0, 2, 4, 4, 6, 6, 6, 8, 8, 8, 8];
+        var test = make_Ulegend(U, ["0", "2", "4", "6", "8"]);
+        planeOptions.svgWidth = 520;
+        planeOptions.svgHeight = 220;
+        planeOptions.zero_y = 200;
+        planeOptions.hscale = 50;
+        planeOptions.vscale = 100;
+        var draw = draw_axis(document.getElementById('drawing'), planeOptions, test);
+        var stroke3 = { color: "black" };
+
+        function DrawPath(span, p, U, k, su, eu) {
+
+            var sstring = "M", u, tt, x, step = 100;
+            for (var i = su * step; i <= eu * step; i++) {
+                u = i / step;
+                x = NURBSUtils.calcBasisFunctions(span, u, p, U);
+                tt = x[k];
+                if (isNaN(x[k])) { x[k] = 0; }
+                if (tt === Infinity) { x[k] = 1; }
+                sstring = sstring.concat(planeOptions.zero_x + planeOptions.hscale * u, " ", planeOptions.zero_y - planeOptions.vscale * x[k], " ");
+            }
+            return sstring;
+        }
+
+        var span = [3, 4, 6, 9, 10];
+
+        for (var i = 0; i < 4; i++) {
+            for (var k = 0; k < 4; k++) {
+                draw.path(DrawPath(span[i], 3, U, k, 0 + 2 * i, 2 + 2 * i)).fill("none").stroke(stroke3);
+            }
+        }
+
+        draw.foreignObject(80, 40).move(18, 70).appendChild("p", { innerText: "`N_{0,3}(u)`" });
+        draw.foreignObject(80, 40).move(30, 105).appendChild("p", { innerText: "`N_{1,3}(u)`" });
+        draw.foreignObject(80, 40).move(85, 115).appendChild("p", { innerText: "`N_{2,3}(u)`" });
+        draw.foreignObject(80, 40).move(155, 90).appendChild("p", { innerText: "`N_{3,3}(u)`" });
+        draw.foreignObject(80, 40).move(210, 100).appendChild("p", { innerText: "`N_{4,3}(u)`" });
+        draw.foreignObject(80, 40).move(245, 80).appendChild("p", { innerText: "`N_{5,3}(u)`" });
+
+        draw.path('M275 120 275 150 272 147 M 278 147 275 150').fill("none").stroke(stroke3);
+
+        draw.foreignObject(80, 40).move(300, 60).appendChild("p", { innerText: "`N_{6,3}(u)`" });
+        draw.foreignObject(80, 40).move(330, 100).appendChild("p", { innerText: "`N_{7,3}(u)`" });
+
+        draw.path('M340 135 340 153 337 150 M343 150 340 153').fill("none").stroke(stroke3);
+
+        draw.foreignObject(80, 40).move(400, 140).appendChild("p", { innerText: "`N_{8,3}(u)`" });
+        draw.foreignObject(80, 40).move(413, 70).appendChild("p", { innerText: "`N_{9,3}(u)`" });
+
+    </script>
+
+</body>
+
+</html>

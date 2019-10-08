@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig3_2b</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1, 1];
+        var P = [new THREE.Vector2(20, 100), new THREE.Vector2(103, 100), new THREE.Vector2(100, 30), new THREE.Vector2(200, 30),
+        new THREE.Vector2(240, 103), new THREE.Vector2(180, 160), new THREE.Vector2(103, 130)];
+        
+        var draw = SVG(document.getElementById('drawing')).size(400, 200);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black", dasharray: "5,5" }, stroke3 = { color: "black" };
+
+        draw.foreignObject(80, 40).move(20, 90).appendChild("p", { innerText: "`P_0`" });
+        draw.foreignObject(80, 40).move(110, 70).appendChild("p", { innerText: "`P_1`" });
+        draw.foreignObject(80, 40).move(90, -10).appendChild("p", { innerText: "`P_2`" });
+        draw.foreignObject(80, 40).move(190, -10).appendChild("p", { innerText: "`P_3`" });
+        draw.foreignObject(80, 40).move(250, 80).appendChild("p", { innerText: "`P_4`" });
+        draw.foreignObject(80, 40).move(180, 150).appendChild("p", { innerText: "`P_5`" });
+        draw.foreignObject(80, 40).move(85, 120).appendChild("p", { innerText: "`P_6`" });
+
+        var sstring = "M", C;
+
+        for (var i = 0; i < 7; i++) {
+            draw.circle(6).move(P[i].x - 3, P[i].y - 3).fill('none').stroke(stroke1);
+            sstring = sstring.concat(P[i].x, " ", P[i].y, " ");
+        }
+
+        for (var j = 4; j < 7; j++) {
+            C = NURBSUtils.calcBSplinePoint1(3, U, P, U[j]);
+            draw.circle(4).move(C.x - 2, C.y - 2).stroke(stroke1);
+        }
+
+        draw.path(sstring).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U, P, U[3], U[4])).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U, P, U[4], U[5])).fill("none").stroke(stroke2);
+        draw.path(NURBSUtils.DrawPath(3, U, P, U[5], U[6])).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U, P, U[6], U[7])).fill("none").stroke(stroke2);
+
+        draw.text('(b)').x(140).y(170);
+
+    </script>
+
+</body>
+
+</html>

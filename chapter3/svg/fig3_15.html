@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig3_15</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0.4, 0.6, 1, 1, 1];
+        var P = [new THREE.Vector2(50, 250), new THREE.Vector2(100, 150), new THREE.Vector2(210, 150), new THREE.Vector2(240, 250), new THREE.Vector2(290, 200)];
+
+        var draw = SVG(document.getElementById('drawing')).size(500, 780);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black" }, stroke3 = { width: 1, dasharray: "5,5" }, strk;
+
+        var markerArrow = draw.marker(17, 7, function (add) { add.path("M1,6 L16,3.5 L1,1 L1,6").fill("white").stroke(stroke1); }).ref(16, 3.5);
+
+        draw.line(20, 280, 380, 280).stroke(stroke1).marker("end", markerArrow);
+        draw.foreignObject(80, 40).move(400, 250).appendChild("p", { innerText: "`x`" });
+
+        draw.line(20, 280, 20, 20).stroke(stroke1).marker("end", markerArrow);
+        draw.foreignObject(80, 40).move(30, -10).appendChild("p", { innerText: "`y`" });
+
+        draw.foreignObject(80, 40).move(40, 245).appendChild("p", { innerText: "`P_0`" });
+        draw.foreignObject(80, 40).move(65, 120).appendChild("p", { innerText: "`P_1`" });
+        draw.foreignObject(80, 40).move(200, 110).appendChild("p", { innerText: "`P_2`" });
+        draw.foreignObject(80, 40).move(210, 230).appendChild("p", { innerText: "`P_3`" });
+        draw.foreignObject(80, 40).move(300, 190).appendChild("p", { innerText: "`P_4`" });
+        //
+        draw.foreignObject(80, 40).move(120, 0).appendChild("p", { innerText: "C'(0)" });
+        draw.foreignObject(80, 40).move(270, 10).appendChild("p", { innerText: "C'(1⁄5)" });
+        draw.foreignObject(80, 40).move(370, 120).appendChild("p", { innerText: "C'(2⁄5)" });
+        draw.foreignObject(80, 40).move(280, 320).appendChild("p", { innerText: "C'(3⁄5)" });
+        draw.foreignObject(80, 40).move(420, 40).appendChild("p", { innerText: "C'(1)" });
+
+        var sstring = "M", C, v1, c15, ck, du = [0, 0.2, 0.4, 0.6, 1];
+
+        for (var i = 0; i < 5; i++) {
+            draw.circle(6).move(P[i].x - 3, P[i].y - 3).fill('none').stroke(stroke1);
+            sstring = sstring.concat(P[i].x, " ", P[i].y, " ");
+        }
+
+        draw.path(sstring).fill("none").stroke(stroke2);
+
+        for (var j = 3; j < 5; j++) {
+            C = NURBSUtils.calcBSplinePoint1(2, U, P, U[j]);
+            draw.circle(4).move(C.x - 2, C.y - 2).stroke(stroke1);
+        }
+
+        for (var i = 0; i < 5; i++) {
+            ck = NURBSUtils.CurveDerivsAlg1(2, U, P, du[i], 1);
+            v1 = ck[1].clone().multiplyScalar(0.5).add(ck[0]);
+            if (i == 1) {
+                strk = stroke3;
+                draw.circle(6).move(ck[0].x - 3, ck[0].y - 3).fill('none').stroke(stroke1);
+                c15 = ck[1];
+            }
+            else strk = stroke1;
+            draw.line(ck[0].x, ck[0].y, v1.x, v1.y).stroke(strk).marker("end", markerArrow);
+        }
+
+        draw.path(NURBSUtils.DrawPath(2, U, P, 0, 1)).fill("none").stroke(stroke2);
+
+        var PK = NURBSUtils.CurveDerivCpts(2, U, P, 1, 0, 4);
+
+        var sp = new THREE.Vector2(50, 600);
+
+        draw.line(sp.x, sp.y, 380, sp.y).stroke(stroke1).marker("end", markerArrow);
+        draw.foreignObject(80, 40).move(390, sp.y - 20).appendChild("p", { innerText: "`x`" });
+
+        draw.line(sp.x, sp.y, sp.x, 350).stroke(stroke1).marker("end", markerArrow);
+        draw.foreignObject(80, 40).move(sp.x + 5, 310).appendChild("p", { innerText: "`y`" });
+
+        draw.foreignObject(80, 40).move(180, 310).appendChild("p", { innerText: "`Q_0`" });
+        draw.foreignObject(80, 40).move(230, 590).appendChild("p", { innerText: "`Q_1`" });
+        draw.foreignObject(80, 40).move(120, 730).appendChild("p", { innerText: "`Q_2`" });
+        draw.foreignObject(80, 40).move(160, 430).appendChild("p", { innerText: "`Q_3`" });
+
+        draw.foreignObject(80, 40).move(210, 430).appendChild("p", { innerText: "C'(1⁄5)" });
+
+        draw.text('(a)').x(185).y(280);
+        sstring = "M";
+
+        for (var i = 0; i < PK[1].length; i++) {
+            draw.line(sp.x, sp.y, sp.x + PK[1][i].x / 2, sp.y + PK[1][i].y / 2).stroke(stroke1).marker("end", markerArrow);
+            sstring = sstring.concat(sp.x + PK[1][i].x / 2, " ", sp.y + PK[1][i].y / 2, " ");
+        }
+
+        draw.path(sstring).fill("none").stroke(stroke1);
+        draw.line(sp.x, sp.y, sp.x + c15.x / 2, sp.y + c15.y / 2).stroke(stroke3).marker("end", markerArrow);
+
+        draw.text('(b)').x(185).y(760);
+
+    </script>
+
+</body>
+
+</html>

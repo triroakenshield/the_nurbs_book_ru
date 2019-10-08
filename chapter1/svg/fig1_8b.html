@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0px;
+        }
+    </style>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+</head>
+
+<body>
+    <svg width="600" height="520" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <marker id="markerArrow" markerWidth="17" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                <path d="M1,6 L16,3.5 L1,1 L1,6" stroke="black" stroke-width="1" fill="none" />
+            </marker>
+        </defs>
+        <image xlink:href="../../svg/plane_xy.svg" x="0" y="0" height="400" width="480" />
+        <circle cx="50" cy="150" r="3" fill="none" stroke="black" />
+        <circle cx="450" cy="350" r="3" fill="none" stroke="black" />
+        <path d="M275 225 260 240 260 235 M265 240 260 240" stroke="black" fill="transparent" />
+        <path d="M50 150 C 150 100 350 400 450 350" stroke="black" fill="transparent" />
+        <line x1="50" y1="150" x2="150" y2="100" stroke="black" marker-end="url(#markerArrow)" />
+        <line x1="450" y1="350" x2="550" y2="300" stroke="black" marker-end="url(#markerArrow)" />
+        <switch>
+            <foreignObject width="140" height="40" x="350" y="50">
+                <p>`C'(u)|\ |C''(u)`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="140" height="40" x="360" y="90">
+                <p>`C''(u)=0`</p>
+            </foreignObject>
+        </switch>
+        <text x="380" y="100" style="font-family: Cambria Math;">или</text>	
+        <text x="280" y="220" style="font-family: Cambria Math;">точка перегиба</text>	
+        <text x="280" y="400">(b)</text>
+    </svg>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0px;
+        }
+    </style>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+    <script type="text/javascript" src="Bernstein.js"></script>
+</head>
+
+<body>
+    <svg id="fig" width="350" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <image xlink:href="../../svg/plane_Bu.svg" x="0" y="0" height="250" width="350" />
+        <path id="bu_path" d="M10 240" stroke="black" fill="transparent" />
+        <script>
+
+            var path = document.getElementById("bu_path");
+            path.setAttribute("d", DrawPath(3));
+
+        </script>
+        <switch>
+            <foreignObject width="100" height="40" x="30" y="20">
+                <p>`B_{0,3}`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="90" y="110">
+                <p>`B_{1,3}`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="190" y="110">
+                <p>`B_{2,3}`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="240" y="20">
+                <p>`B_{3,3}`</p>
+            </foreignObject>
+        </switch>
+    </svg>
+</body>
+
+</html>

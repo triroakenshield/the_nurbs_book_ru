@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>img3_23b</title>
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="../../js/lib/aframe/aframe-environment-component.min.js"></script>
+    <script src="../../js/lib/aframe/aframe-extras.min.js"></script>
+    <script src="../../js/lib/aframe/aframe-html-shader.min.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+<!--  -->
+    <script src="../../js/aframe/xyz.js"></script>
+    <script src="../../js/aframe/surfnet.js"></script>
+    <script src="../../js/aframe/surflines.js"></script>
+</head>
+
+<body>
+    <a-scene id="model" background="color: #FFFFFF">
+        <a-light type="point" position="5 5 5"></a-light>
+        <a-entity id="cameraRig" position="0 0 0.5" movement-controls="fly: true">
+            <a-camera id="camera" look-controls> </a-camera>
+            <a-entity vive-controls="hand: left"></a-entity>
+            <a-entity laser-controls="hand: right"></a-entity>
+        </a-entity>
+
+        <a-entity position="0 1 -4" rotation="25 -40 -15" axis-xyz>
+            <a-text side="double" position="-0.1 0 2.1" rotation="-5 60 0" value="X" color="black"></a-text>
+            <a-text side="double" position="0 2 0" rotation="-5 60 0" value="Z" color="black"></a-text>
+            <a-text side="double" position="2 0 0" rotation="-5 60 0" value="Y" color="black"></a-text>
+
+            <a-entity
+                surfnet="controlPoints: 
+            0, 1.8, 0, 1, 
+            0, 1.8, 0.3, 1, 
+            0, 1.8, 0.6, 1, 
+            0, 1.8, 0.9, 1, 
+            0, 1.8, 1.2, 1, 
+            0, 1.8, 1.5, 1, 
+            0, 1.8, 1.8, 1, 
+            0, 1.8, 2.1, 1, 
+
+            0.4, 1.8, 0, 1, 
+            0.4, 1.8, 0.3, 1, 
+            0.4, 1.8, 0.6, 1, 
+            0.4, 1.8, 0.9, 1, 
+            0.4, 1.8, 1.2, 1, 
+            0.4, 1.8, 1.5, 1, 
+            0.4, 1.8, 1.8, 1, 
+            0.4, 1.8, 2.1, 1, 
+
+            0.8, 1.8, 0, 1, 
+            0.8, 1.8, 0.3, 1, 
+            0.8, 1.8, 0.6, 1, 
+            0.8, 1.8, 0.9, 1, 
+            0.8, 1.8, 1.2, 1, 
+            0.8, 1.8, 1.5, 1, 
+            0.8, 1.8, 1.8, 1, 
+            0.8, 1.8, 2.1, 1, 
+
+            1.2, 1.8, 0, 1, 
+            1.2, 1.8, 0.3, 1, 
+            1.2, 2.2, 0.6, 1, 
+            1.2, 1.8, 0.9, 1, 
+            1.2, 1.8, 1.2, 1, 
+            1.2, 1.8, 1.5, 1, 
+            1.2, 1.8, 1.8, 1, 
+            1.2, 1.8, 2.1, 1, 
+
+            1.6, 1.8, 0, 1, 
+            1.6, 1.8, 0.3, 1, 
+            1.6, 1.8, 0.6, 1, 
+            1.6, 1.8, 0.9, 1, 
+            1.6, 1.8, 1.2, 1, 
+            1.6, 1.8, 1.5, 1, 
+            1.6, 1.8, 1.8, 1, 
+            1.6, 1.8, 2.1, 1, 
+
+            2, 1.8, 0, 1, 
+            2, 1.8, 0.3, 1, 
+            2, 1.8, 0.6, 1, 
+            2, 1.8, 0.9, 1, 
+            2, 1.8, 1.2, 1, 
+            2, 1.8, 1.5, 1, 
+            2, 1.8, 1.8, 1, 
+            2, 1.8, 2.1, 1;
+            
+             U: 0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1; 
+             V: 0, 0, 0, 0, 0.2, 0.4, 0.6, 0.8, 1, 1, 1, 1; 
+             p: 2; q: 3; nx: 6; ny: 8;">
+            </a-entity>
+
+            
+            <a-entity
+            surflines="controlPoints: 
+            0, 1.2, 0, 1, 
+            0, 1.2, 0.3, 1, 
+            0, 1.2, 0.6, 1, 
+            0, 1.2, 0.9, 1, 
+            0, 1.2, 1.2, 1, 
+            0, 1.2, 1.5, 1, 
+            0, 1.2, 1.8, 1, 
+            0, 1.2, 2.1, 1, 
+
+            0.4, 1.2, 0, 1, 
+            0.4, 1.2, 0.3, 1, 
+            0.4, 1.2, 0.6, 1, 
+            0.4, 1.2, 0.9, 1, 
+            0.4, 1.2, 1.2, 1, 
+            0.4, 1.2, 1.5, 1, 
+            0.4, 1.2, 1.8, 1, 
+            0.4, 1.2, 2.1, 1, 
+
+            0.8, 1.2, 0, 1, 
+            0.8, 1.2, 0.3, 1, 
+            0.8, 1.2, 0.6, 1, 
+            0.8, 1.2, 0.9, 1, 
+            0.8, 1.2, 1.2, 1, 
+            0.8, 1.2, 1.5, 1, 
+            0.8, 1.2, 1.8, 1, 
+            0.8, 1.2, 2.1, 1, 
+
+            1.2, 1.2, 0, 1, 
+            1.2, 1.2, 0.3, 1, 
+            1.2, 1.6, 0.6, 1, 
+            1.2, 1.2, 0.9, 1, 
+            1.2, 1.2, 1.2, 1, 
+            1.2, 1.2, 1.5, 1, 
+            1.2, 1.2, 1.8, 1, 
+            1.2, 1.2, 2.1, 1, 
+
+            1.6, 1.2, 0, 1, 
+            1.6, 1.2, 0.3, 1, 
+            1.6, 1.2, 0.6, 1, 
+            1.6, 1.2, 0.9, 1, 
+            1.6, 1.2, 1.2, 1, 
+            1.6, 1.2, 1.5, 1, 
+            1.6, 1.2, 1.8, 1, 
+            1.6, 1.2, 2.1, 1, 
+
+            2, 1.2, 0, 1, 
+            2, 1.2, 0.3, 1, 
+            2, 1.2, 0.6, 1, 
+            2, 1.2, 0.9, 1, 
+            2, 1.2, 1.2, 1, 
+            2, 1.2, 1.5, 1, 
+            2, 1.2, 1.8, 1, 
+            2, 1.2, 2.1, 1;
+            
+             U: 0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1; 
+             V: 0, 0, 0, 0, 0.2, 0.4, 0.6, 0.8, 1, 1, 1, 1; 
+             p: 2; q: 3; nx: 6; ny: 8;">
+            </a-entity>
+
+            <a-text side="double" position="1.5 0 1.7" rotation="-5 35 5" scale="0.8 0.8 1" value="(b)" color="black">
+
+        </a-entity>
+    </a-scene>
+</body>
+
+</html>

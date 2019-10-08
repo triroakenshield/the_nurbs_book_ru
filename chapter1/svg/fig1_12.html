@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0px;
+        }
+    </style>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+    <script type="text/javascript" src="Bernstein.js"></script>
+</head>
+
+<body>
+    <svg width="320" height="320" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <circle cx="55" cy="180" r="3" fill="none" stroke="black" />
+        <circle cx="20" cy="80" r="3" fill="none" stroke="black" />
+        <circle cx="210" cy="30" r="3" fill="none" stroke="black" />
+        <circle cx="290" cy="120" r="3" fill="none" stroke="black" />
+        <circle cx="240" cy="280" r="3" fill="none" stroke="black" />
+        <circle cx="90" cy="280" r="3" fill="none" stroke="black" />
+        <path d="M20 80 210 30 290 120 240 280 90 280 20 80" stroke="black" fill="transparent" />
+        <path id="b_" d="M20 180" stroke="black" fill="transparent" />
+
+        <script>
+            var P = [[55, 180], [20, 80], [210, 30], [290, 120], [240, 280], [90, 280], [55, 180]];       
+            var sp = "M", np;
+    
+            for (var u = 0; u <= 200; u++) {
+                np=deCasteljau1(P,6,u*0.005);
+                sp = sp.concat(np[0], " ", np[1], " ");
+            }
+
+            var path = document.getElementById("b_");
+            path.setAttribute("d", sp);
+
+        </script>
+
+        <switch>
+            <foreignObject width="100" height="40" x="0" y="170">
+                <p>`P_0=P_6`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="0" y="60">
+                <p>`P_1`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="200" y="-10">
+                <p>`P_2`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="300" y="100">
+                <p>`P_3`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="250" y="270">
+                <p>`P_4`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="80" x="70" y="270">
+                <p>`P_5`</p>
+            </foreignObject>
+        </switch>
+    </svg>
+</body>
+
+</html>

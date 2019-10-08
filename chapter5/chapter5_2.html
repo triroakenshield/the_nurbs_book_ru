@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Вставка узла</title>
+    <link rel="stylesheet" href="../css/Pagestyle.css" />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_CHTML'></script>
+</head>
+
+<body>
+    <div class="header">Глава V</div>
+    <div class="section"><b>5.2.</b> Вставка узла</div>
+
+    <p>Пусть `C^w(u)=∑_(i=0)^nN_(i,p)(u)P_i^w` будет NURBS кривой определённой на `U=``{u_0,…,u_m}`. Пусть `bar u in
+        [u_k,u_{k+1})`, и вставьте `bar u` в `U`, чтобы сформировать новый узло&shy;вой вектор `bar U={bar u_0=u_0,…,bar
+        u_k=u_k, bar u_{k+1}=bar u, bar u_{k+2}=u_{k+1},…,bar u_{m+1}=u_m}`. Если `V_U` и `V_{bar U}` обозначим
+        векторное пространство кривых, определенных на `U` и `bar U`, соответственно, то, очевидно `V_U∈V_{bar U}` (и
+        `dim(V_{bar U}=dim(V_U)+1`); Таким образом, `C^w(u)` имеет представление о `bar U` в форме</p>
+
+    <p class="formula">`C^w(u)=sum_(i=0)^(n+1)bar N_(i,p)(u)Q_i^w`<a name="f5_1" class="nomer">(5.1)</a></p>
+
+    где `{bar N_(i,p)(u)}` являются базисной функцией `p`-ой степени на `bar U`. Термин <i>вставка узла</i> обычно
+    относится к процессу определения `{Q_i^w}` в <a href="#f5_1">уравнении (5.1)</a>. Важно отметить, что вставка
+    узла действительно только изменение векторного пространства базиса; Кривая не изменяется, ни геометрически ни
+    параметрически.
+
+    <p>Хотя это и не сразу видно, вставка узла является одним из наиболее важных из всех алгоритмов B-сплайнов.
+        Некоторые из его использований являются:</p>
+
+    <ul>
+        <li>определение точек и производных на кривых и поверхностях;</li>
+        <li>разбиение кривых и поверхностей;</li>
+        <li>добавление контрольных точек для того, чтобы повысить гибкость в контроле формы (интерактивный дизайн).</li>
+    </ul>
+
+    <p>Теперь `{Q_i^w}` в <a href="#f5_1">уравнении (5.1)</a> могут быть получены путем постановки и решения системы
+        линейных уравнений. Если мы установим</p>
+
+    <p class="formula">`sum_(i=0)^nN_(i,p)(u)P_i^w=sum_(i=0)^(n+1)bar N_(i,p)(u)Q_i^w`<a name="f5_2"
+            class="nomer">(5.2)</a></p>
+
+    затем, подставив `n+2` подходящих значений и в <a href="#f5_2">уравнение (5.2)</a>, мы получим не единственную,
+    общую систему `n+2` линейных уравнений с `n+2` неизвестных, `Q_i^w`. Тем не менее, существует более эффективное
+    решение. Из свойства <a href="#pr2_2">Св.2.2</a> и `bar u in [u_k,u_{k+1})` следует, что
+
+    <p class="formula">`sum_(i=k-p)^kN_(i,p)(u)P_i^w=sum_(i=k-p)^(k+1)bar N_(i,p)(u)Q_i^w`<a name="f5_3"
+            class="nomer">(5.3)</a></p>
+
+    Для всех `u ∈ [u_k,u_(k+1))`, и
+
+    <p class="formula">`N_(i,p)(u)=bar N_(i,p)(u)` &emsp; `i=0,…,k-p-1`</p>
+    <p class="formula">`N_(i,p)(u)=bar N_(i+1,p)(u)` &emsp; `i=k+1,…,n`<a name="f5_4" class="nomer">(5.4)</a></p>
+
+    Из <a href="#f5_3">уравнений (5.3)</a> и <a href="#f5_4">(5.4)</a> вместе с линейной независимостью базисных функций
+    (<a href="..\chapter2\chapter2_4.html">раздел 2.4</a>), следует, что
+
+    <p class="formula">`P_i^w=Q_i^w` &emsp; `i=0,…,k-p-1`</p>
+    <p class="formula">`P_i^w=Q_(i+1)^w` &emsp; `i=k+1,…,n<a name="f5_5" class="nomer">(5.5)</a></p>
+
+    <p>Теперь рассмотрим `N_(i,p)(u)` для `i=k-p,…,k`. Они могут быть выражены в терминах `bar N_(i,p)(u)` при
+        `i=k-p,…,k+1`, путем</p>
+
+    <p class="formula">`N_(i,p)(u)=(bar u - bar u_i)/(bar u_(i+p+1) - bar u_i)bar N_(i,p)(u)+(bar u_(i+p+2) - bar
+        u)/(bar u_(i+p+2) - bar u_(i+1))bar N_(i+1,p)(u)`<a name="f5_6" class="nomer">(5.6)</a></p>
+
+    <a href="#f5_6">Уравнение (5.6)</a> доказано индукцией по `p` (и по <a href="#f2_5">формуле [2.5]</a>), но мы
+    опускаем его здесь, так как оно довольно грязное. Доказательства, использующие разделенные разности встречаются в
+    [<a href="..\references.html#DeBo78">DeBo78</a>; <a href="..\references.html#Boeh80">Boeh80</a>;
+    <a href="..\references.html#Lee83">Lee83</a>].
+
+    <p>Для краткости мы сейчас запишем `bar N_i` для `bar N_(i,p)(u)`. Подставляя <a href="#f5_6">(5.6)</a> в <a
+            href="#f5_3">уравнение (5.3)</a> получаем</p>
+
+    <p class="formula">`((bar u-bar u_(k-p))/(bar u_(k+1)- bar u_(k-p))bar N_(k-p)+(bar u_(k+2) - bar u)/(bar
+        u_(k+2)-bar u_(k-p+1))bar N_(k-p+1))P_(k-p)^w`</p>
+    <p class="formula">`+((bar u- bar u_(k-p+1))/(bar u_(k+2) - bar u_(k-p+1))bar N_(k-p+1)+(bar u_(k+3) - bar u)/(bar
+        u_(k+3) - bar u_(k-p+2))bar N_(k-p+2))P_(k-p+1)^w`</p>
+    <p class="formula">`vdots`</p>
+    <p class="formula">`+((bar u - bar u_k)/(bar u_(k+p+1) - bar u_k )bar N_k+(bar u_(k+p+2) - bar u)/( bar u_(k+p+2) -
+        bar u_(k+1)) bar N_(k+1))P_k^w=bar N_(k-p)Q_(k-p)^w+⋯+bar N_(k+1)Q_(k+1)^w`</p>
+
+    Приравняв коэффициенты и используя узловой вектор `U` вместо `bar U`, мы получим
+
+    <p class="formula">`0=bar N_(k-p)(Q_(k-p)^w-P_(k-p)^w)+bar N_(k-p+1)(Q_(k-p+1)^w-(bar u - bar u_(k-p+1))/(bar
+        u_(k+1) - bar u_(k-p+1))P_(k-p+1)^w+(bar u_(k+1)-bar u)/(bar u_(k+1) - bar u_(k-p+1))P_(k-p)^w)+⋯+`</p>
+    <p class="formula">`bar N_k(Q_k^w-(bar u - bar u_k)/(bar u_(k+p) - bar u_k)P_k^w+(bar u_(k+p) - bar u)/(bar u_(k+p)
+        - bar u_k)P_(k-1)^w) + bar N_(k+1)(Q_(k+1)^w-P_k^w)`<a name="f5_7" class="nomer">(5.7)</a></p>
+
+    Для `i=k-p+1,…,k`, мы установим
+
+    <p class="formula">`α_i=(bar u-u_i)/(u_(i+p)-u_i)`<a name="f5_8" class="nomer">(5.8)</a></p>
+
+    И отмечаем, что
+
+    <p class="formula">`1-α_i=(u_(i+p) - bar u)/(u_(i+p)-u_i)`<a name="f5_9" class="nomer">(5.9)</a></p>
+
+    Использование линейной независимости базисных функций и подставляя <a href="#f5_8">формулы (5.8)</a> и <a
+        href="#f5_9">(5.9)</a> в <a href="#f5_9">уравнение (5.7)</a> получаем
+
+    <p class="formula">`Q_(k-p)^w=P_(k-p)^w`</p>
+    <p class="formula">`Q_i^w=α_i P_i^w+(1-α_i)P_(i-1)^w` &emsp; `k-p+1≤i≤k`</p>
+    <p class="formula">`Q_(k+1)^w=P_k^w`<a name="f5_10" class="nomer">(5.10)</a></p>
+
+    <p>Наконец, комбинируя <a href="#f5_5">формулы (5.5)</a> и <a href="#f5_10">(5.10)</a> , мы получим формулу для
+        вычисления всех новых контрольных точек, `Q_i^w`, <a href="#f5_1">уравнения (5.1)</a>, т.е.</p>
+
+    <p class="formula">`Q_i^w=α_i P_i^w+(1-α_i)P_(i-1)^w`<a name="f5_11" class="nomer">(5.11)</a></p>
+
+    где
+
+    <p class="formula">`α_i={(1,i≤k-p), ((bar u-u_i)/(u_(i+p)-u_i),k-p+1≤i≤k),(0,i≥k+1):}`</p>
+
+    <a href="#f5_11">Уравнение (5.11)</a> говорит, что только `p` новых контрольных точек должно быть вычислено. Для краткости мы используем `P`
+    вместо `P^w` в примерах Пример5.1 - Пример5.4.
+
+    <p>...</p>
+    <p>...</p>
+    <p>...</p>
+    <p>...</p>
+
+    <p class="formula">``</p>
+    <p class="formula">``<a name="f5_11" class="nomer">(5.11)</a></p>
+
+    <footer>
+        <a href="chapter5_1.html">Назад</a>
+        <a href="..\сontents.html">Содержание</a>
+        <a href="chapter5_3.html">Вперёд</a>
+    </footer>
+</body>
+
+</html>

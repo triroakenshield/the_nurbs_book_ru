@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0px;
+        }
+    </style>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+    <script type="text/javascript" src="Bernstein.js"></script>
+</head>
+
+<body>
+    <svg id="fig" width="350" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <image xlink:href="../../svg/plane_Bu.svg" x="0" y="0" height="250" width="350" />
+        <path d="M10 240 290 40 M10 40 290 240" stroke="black" fill="transparent" />
+        <path id="b02" d="M10 240" stroke="black" fill="transparent" />
+        <path id="b12" d="M10 240" stroke="black" fill="transparent" />
+        <path id="b13" d="M10 240" stroke="black" fill="transparent" />
+
+        <script>
+
+            var path = document.getElementById("b12");
+            path.setAttribute("d", DrawPath1(1, 2));
+
+            path = document.getElementById("b02");
+            path.setAttribute("d", DrawPath1(0, 2));
+
+            path = document.getElementById("b13");
+            path.setAttribute("d", DrawPath1(1, 3));
+
+        </script>
+        <switch>
+            <foreignObject width="100" height="40" x="30" y="20">
+                <p>`(1-u)`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="20" y="70">
+                <p>`B_{0,2}`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="30" y="130">
+                <p>`B_{1,3}`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="230" y="130">
+                <p>`B_{1,2}`</p>
+            </foreignObject>
+        </switch>
+        <switch>
+            <foreignObject width="100" height="40" x="240" y="30">
+                <p>`u`</p>
+            </foreignObject>
+        </switch>
+    </svg>
+</body>
+
+</html>

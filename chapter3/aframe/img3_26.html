@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>img3_26</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"> </script>
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="../../js/lib/aframe/aframe-environment-component.min.js"></script>
+    <script src="../../js/lib/aframe/aframe-extras.min.js"></script>
+    <script src="../../js/lib/aframe/aframe-html-shader.min.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <!--  -->
+    <script src="../../js/aframe/xyz.js"></script>
+    <script src="../../js/aframe/surfnet.js"></script>
+    <script src="../../js/aframe/surflines3.js"></script>
+</head>
+
+<body>
+    <a-scene id="model" background="color: #FFFFFF">
+        <a-light type="point" position="5 5 5"></a-light>
+        <a-entity id="cameraRig" position="0 0 0.5" movement-controls="fly: true">
+            <a-camera id="camera" look-controls> </a-camera>
+            <a-entity vive-controls="hand: left"></a-entity>
+            <a-entity laser-controls="hand: right"></a-entity>
+        </a-entity>
+
+        <a-entity position="0 1.5 -2.5" rotation="15 -40 -15" axis-xyz>
+            <a-text side="double" position="-0.1 0 2.1" rotation="-5 60 0" value="X" color="black"></a-text>
+            <a-text side="double" position="0 2 0" rotation="-5 60 0" value="Z" color="black"></a-text>
+            <a-text side="double" position="2 0 0" rotation="-5 60 0" value="Y" color="black"></a-text>
+
+            <a-entity surflines="controlPoints: 
+                0.3, 0.5, 0.3, 1, 
+                0.3, 0.4, 0.6, 1, 
+                0.3, 0.5, 0.9, 1, 
+                0.3, 0.4, 1.2, 1, 
+                0.3, 0.1, 1.5, 1, 
+        
+                0.6, 0.4, 0.3, 1, 
+                0.6, 0.5, 0.6, 1, 
+                0.6, 0.6, 0.9, 1, 
+                0.6, 0.5, 1.2, 1, 
+                0.6, 0.4, 1.5, 1, 
+        
+                0.9, 0.5, 0.3, 1, 
+                0.9, 0.6, 0.6, 1, 
+                0.9, 0.6, 0.9, 0.1, 
+                0.9, 0.7, 1.2, 1, 
+                0.9, 0.5, 1.5, 1, 
+        
+                1.2, 0.4, 0.3, 1, 
+                1.2, 0.5, 0.6, 1, 
+                1.2, 0.6, 0.9, 1, 
+                1.2, 0.6, 1.2, 1, 
+                1.2, 0.4, 1.5, 1, 
+        
+                1.5, 0.1, 0.3, 1, 
+                1.5, 0.4, 0.6, 1, 
+                1.5, 0.5, 0.9, 1, 
+                1.5, 0.4, 1.2, 1, 
+                1.5, 0.2, 1.5, 1;
+        
+                U: 0, 0, 0, 0, 0.5, 1, 1, 1, 1; 
+                V: 0, 0, 0, 0, 0.5, 1, 1, 1, 1; 
+                p: 3; q: 3; nx: 5; ny: 5;
+                lu: 0, 0.3, 0.7, 0.75, 1;
+                lv: 0, 0.2, 0.5, 0.8, 0.6, 1;
+                lum: 0, 0, 0, 1, 0;
+                lvm: 0, 0, 0, 0, 1, 0;
+                ders: 0.75, 0.6, 2, 0.5, 0.5;">
+
+                <a-plane material="shader: html; target: #Suv; ratio: height; transparent: true; side: double"
+                    position="1.2 0.9 1.6" rotation="-5 60 0" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #Svv; ratio: height; transparent: true; side: double"
+                    position="1.3 0.45 1.6" rotation="-20 30 0" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #u; ratio: height; transparent: true; side: double"
+                    position="0.9 0.45 1.6" rotation="-15 30 0" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #Suu; ratio: height; transparent: true; side: double"
+                    position="1.6 0.45 1.6" rotation="-5 60 0" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #v; ratio: height; transparent: true; side: double"
+                    position="1.6 0.3 0.9" rotation="-5 10 0" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #Su; ratio: height; transparent: true; side: double"
+                    position="1.6 0.7 1.1" rotation="-5 60 0" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #Sv; ratio: height; transparent: true; side: double"
+                    position="1.3 0.5 1.0" rotation="-5 60 0" scale="0.3 0.3 1"></a-plane>
+
+            </a-entity>
+        </a-entity>
+    </a-scene>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="Suv" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$S_{uv}$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="Svv" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$S_{vv}$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="Suu" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$S_{uu}$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="Sv" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$S_v$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="Su" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$S_u$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="u" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$u=3/4$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="v" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$v=2/5$$</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

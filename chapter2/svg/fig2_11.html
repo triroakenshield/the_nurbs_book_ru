@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig2_11</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0, 0.2, 0.4, 0.8, 1.2, 1.5, 1.5, 1.5, 1.5];
+        var nname = ['0', '`u_i`', '`u_{i+1}`', '`u_{i+2}`', '`u_{i+3}`', '`u_{i+4}`'];
+        planeOptions.svgWidth = 580;
+        planeOptions.svgHeight = 420;
+        planeOptions.hscale = 300;
+        planeOptions.vscale = 200;
+        planeOptions.zero_y = 260;
+        var draw = draw_axis(document.getElementById('drawing'), planeOptions, []);
+        var stroke1 = { width: 1 }, stroke2 = { width: 1, dasharray: "5,5" }, stroke3 = { color: "black" };
+        var dxx = 5, dx, dy, odz = planeOptions.zero_x + planeOptions.hscale * U[4], ody = planeOptions.zero_y;
+        
+        for (let i = 4; i < 9; i++) {
+            dx = planeOptions.zero_x + planeOptions.hscale * U[i];
+            draw.line(dx, planeOptions.zero_y - 5, dx, planeOptions.zero_y + 5).stroke(stroke1);
+            if (i > 4) dxx = 30;
+            draw.foreignObject(40, 40).move(dx - dxx, 245).appendChild("p", { innerText: nname[i - 3] });
+        }
+
+        function DrawPath(span, p, U, k, su, eu) {
+            var sstring = "M", u, tt, x, step = 100;
+            for (var i = su * step; i <= eu * step; i++) {
+                u = i / step;
+                x = NURBSUtils.calcBasisFunctions(span, u, p, U);
+                tt = x[k];
+                if (isNaN(x[k])) { x[k] = 0; }
+                if (tt === Infinity) { x[k] = 1; }
+                sstring = sstring.concat(planeOptions.zero_x + planeOptions.hscale * u, " ", planeOptions.zero_y - planeOptions.vscale * x[k], " ");
+            }
+            return sstring;
+        }
+
+        function DrawPath2(span, p, U, d, k, su, eu, scale) {
+            var sstring = "M", u, tt, x, step = 100;
+            for (var i = su * step; i <= eu * step; i++) {
+                u = i / step;
+                x = NURBSUtils.calcBasisFunctionDerivatives(span, u, p, d, U);
+                sstring = sstring.concat(planeOptions.zero_x + planeOptions.hscale * u, " ", planeOptions.zero_y - planeOptions.vscale * x[d][k] / scale, " ");
+            }
+            return sstring;
+        }
+
+        for (let k = 0; k < 4; k++) {
+            draw.path(DrawPath(4 + k, 3, U, 3 - k, U[4 + k], U[5 + k])).fill("none").stroke(stroke3);
+            draw.path(DrawPath2(4 + k, 3, U, 1, 3 - k, U[4 + k], U[5 + k], 5)).fill("none").stroke(stroke3);
+            draw.path(DrawPath2(4 + k, 3, U, 2, 3 - k, U[4 + k], U[5 + k], 25)).fill("none").stroke(stroke3);
+            draw.path(DrawPath2(4 + k, 3, U, 3, 3 - k, U[4 + k], U[5 + k], 80)).fill("none").stroke(stroke3);
+
+            dy = planeOptions.zero_y - planeOptions.vscale * NURBSUtils.calcBasisFunctionDerivatives(4 + k, U[4 + k], 3, 3, U)[3][3 - k] / 80;
+            draw.line(odz, ody, odz, dy).stroke(stroke2);
+            ody = dy;
+            odz = planeOptions.zero_x + planeOptions.hscale * U[5 + k]
+        }
+
+        odz = planeOptions.zero_x + planeOptions.hscale * U[9]
+        draw.line(odz, ody, odz, planeOptions.zero_y).stroke(stroke2);
+
+        draw.foreignObject(80, 40).move(255, 155).appendChild("p", { innerText: "`N_{i,3}(u)`" });
+        draw.foreignObject(80, 40).move(305, 315).appendChild("p", { innerText: "`N_{i,3}^'`" });
+        draw.foreignObject(80, 40).move(410, 190).appendChild("p", { innerText: "`N_{i,3}^{''}`" });
+        draw.foreignObject(80, 40).move(290, 80).appendChild("p", { innerText: "`N_{i,3}^{'''}`" });
+
+    </script>
+
+</body>
+
+</html>

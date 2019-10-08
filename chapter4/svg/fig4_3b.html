@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig4_3b</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1, 1];
+        var w = [1, 1, 1, 0.3, 1, 1, 1];
+        var p = 3;
+        var test = make_Ulegend(U, ["0", "1⁄4", "1⁄2", "3⁄4", "1"]);
+        var draw = draw_axis(document.getElementById('drawing'), planeOptions, test);
+
+        let str = { color: "black" };
+
+        for (var j = 0; j < 4; j++) {
+            for (var i = 0; i < 4; i++) {
+                draw.path(NURBSUtils.DrawPathR(3 + j, p, U, w, i, j, U[3 + j], U[4 + j])).fill("none").stroke(str);
+            }
+        }
+
+        draw.foreignObject(40, 100).move(15, 40).appendChild("p", { innerText: "`R_{0,3}`" });
+        draw.foreignObject(40, 100).move(45, 80).appendChild("p", { innerText: "`R_{1,3}`" });
+        draw.foreignObject(40, 100).move(125, 65).appendChild("p", { innerText: "`R_{2,3}`" });
+        draw.foreignObject(40, 100).move(195, 100).appendChild("p", { innerText: "`R_{3,3}`" });
+        draw.foreignObject(40, 100).move(265, 65).appendChild("p", { innerText: "`R_{4,3}`" });
+        draw.foreignObject(40, 100).move(350, 85).appendChild("p", { innerText: "`R_{5,3}`" });
+        draw.foreignObject(40, 100).move(410, 35).appendChild("p", { innerText: "`R_{6,3}`" });
+
+        draw.text('(b)').x(160).y(182);
+    </script>
+
+</body>
+
+</html>

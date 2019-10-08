@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>img3_25</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"> </script>
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="../../js/lib/aframe/aframe-environment-component.min.js"></script>
+    <script src="../../js/lib/aframe/aframe-extras.min.js"></script>
+    <script src="../../js/lib/aframe/aframe-html-shader.min.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <!--  -->
+    <script src="../../js/aframe/xyz.js"></script>
+    <script src="../../js/aframe/surfnet.js"></script>
+    <script src="../../js/aframe/surflines.js"></script>
+</head>
+
+<body>
+    <a-scene id="model" background="color: #FFFFFF">
+        <a-light type="point" position="5 5 5"></a-light>
+        <a-entity id="cameraRig" position="0 0 0.5" movement-controls="fly: true">
+            <a-camera id="camera" look-controls> </a-camera>
+            <a-entity vive-controls="hand: left"></a-entity>
+            <a-entity laser-controls="hand: right"></a-entity>
+        </a-entity>
+
+        <a-entity position="0 2 -3.5" rotation="25 -50 -30" axis-xyz>
+            <a-text side="double" position="-0.1 0 2.1" rotation="-5 60 0" value="X" color="black"></a-text>
+            <a-text side="double" position="0 2 0" rotation="-5 60 0" value="Z" color="black"></a-text>
+            <a-text side="double" position="2 0 0" rotation="-5 60 0" value="Y" color="black"></a-text>
+
+            <a-entity surfnet="controlPoints: 
+            0.0, 1.2, 2, 1, 
+            0.5, 0.8, 2, 1, 
+            1, 1.3, 2, 1, 
+            1, 1.3, 2, 1, 
+            1, 1.3, 2, 1, 
+            1.5, 0.8, 2, 1, 
+            2, 1.2, 2, 1,
+
+            0.0, 1, 1.5, 1, 
+            0.5, 0.5, 1.5, 1, 
+            1, 1.1, 1.5, 1, 
+            1, 1.1, 1.5, 1, 
+            1, 1.1, 1.5, 1, 
+            1.5, 0.5, 1.5, 1, 
+            2, 1, 1.5, 1,
+
+            0.0, 1, 1, 1, 
+            0.5, 0.5, 1, 1, 
+            1, 1.1, 1, 1, 
+            1, 1.1, 1, 1, 
+            1, 1.1, 1, 1, 
+            1.5, 0.5, 1, 1, 
+            2, 1, 1, 1,
+
+            0.0, 1, 0.5, 1, 
+            0.5, 0.5, 0.5, 1, 
+            1, 1.1, 0.5, 1, 
+            1, 1.1, 0.5, 1, 
+            1, 1.1, 0.5, 1, 
+            1.5, 0.5, 0.5, 1, 
+            2, 1, 0.5, 1,
+
+            0.0, 1.2, 0, 1, 
+            0.5, 0.8, 0, 1, 
+            1, 1.3, 0, 1, 
+            1, 1.3, 0, 1, 
+            1, 1.3, 0, 1, 
+            1.5, 0.8, 0, 1, 
+            2, 1.2, 0, 1;
+
+            U: 0, 0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1, 1;  
+            V: 0, 0, 0, 0, 0.5, 1, 1, 1, 1; 
+            p: 3; q: 3; nx: 5; ny: 7;">
+            </a-entity>
+
+            <a-entity surflines="controlPoints: 
+            0.0, 1.2, 2, 1, 
+            0.5, 0.8, 2, 1, 
+            1, 1.3, 2, 1, 
+            1, 1.3, 2, 1, 
+            1, 1.3, 2, 1, 
+            1.5, 0.8, 2, 1, 
+            2, 1.2, 2, 1,
+
+            0.0, 1, 1.5, 1, 
+            0.5, 0.5, 1.5, 1, 
+            1, 1.1, 1.5, 1, 
+            1, 1.1, 1.5, 1, 
+            1, 1.1, 1.5, 1, 
+            1.5, 0.5, 1.5, 1, 
+            2, 1, 1.5, 1,
+
+            0.0, 1, 1, 1, 
+            0.5, 0.5, 1, 1, 
+            1, 1.1, 1, 1, 
+            1, 1.1, 1, 1, 
+            1, 1.1, 1, 1, 
+            1.5, 0.5, 1, 1, 
+            2, 1, 1, 1,
+
+            0.0, 1, 0.5, 1, 
+            0.5, 0.5, 0.5, 1, 
+            1, 1.1, 0.5, 1, 
+            1, 1.1, 0.5, 1, 
+            1, 1.1, 0.5, 1, 
+            1.5, 0.5, 0.5, 1, 
+            2, 1, 0.5, 1,
+
+            0.0, 1.2, 0, 1, 
+            0.5, 0.8, 0, 1, 
+            1, 1.3, 0, 1, 
+            1, 1.3, 0, 1, 
+            1, 1.3, 0, 1, 
+            1.5, 0.8, 0, 1, 
+            2, 1.2, 0, 1;
+
+            V: 0, 0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1, 1;  
+            U: 0, 0, 0, 0, 0.5, 1, 1, 1, 1; 
+            p: 3; q: 3; nx: 5; ny: 7;">
+
+                <a-plane material="shader: html; target: #P00; ratio: height; transparent: true; side: double"
+                    position="0, 1.45, 2" rotation="-15 45 5" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #P02; ratio: height; transparent: true; side: double"
+                    position="0, 1.2, 1" rotation="-15 45 5" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #P04; ratio: height; transparent: true; side: double"
+                    position="0, 1.45, 0" rotation="-15 45 5" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #P10; ratio: height; transparent: true; side: double"
+                    position="0.5, 0.8, 2" rotation="-15 45 5" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #P24; ratio: height; transparent: true; side: double"
+                    position="0.8, 1.45, -0.2" rotation="-15 45 5" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #P50; ratio: height; transparent: true; side: double"
+                    position="1.7, 1.1, 2.2" rotation="-15 45 5" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #P60; ratio: height; transparent: true; side: double"
+                    position="2, 1.1, 2" rotation="-25 45 5" scale="0.3 0.3 1"></a-plane>
+
+                <a-plane material="shader: html; target: #P64; ratio: height; transparent: true; side: double"
+                    position="2, 1.4, 0" rotation="-25 45 5" scale="0.3 0.3 1"></a-plane>
+
+            </a-entity>
+        </a-entity>
+    </a-scene>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="P00" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$P_{0,0}$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="P02" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$P_{0,2}$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="P04" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$P_{0,4}$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="P10" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$P_{1,0}$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="P50" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$P_{5,0}$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="P60" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$P_{6,0}$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="P64" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$P_{6,4}$$</p>
+        </div>
+    </div>
+
+    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
+        <div id="P24" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+            <p style="border: 1px #FFF">$$P_{2,4}=P_{3,4}=P_{4,4}$$</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

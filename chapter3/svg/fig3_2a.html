@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig3_2a</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1, 1];
+        var test = make_Ulegend(U, ["0", "1⁄4", "1⁄2", "3⁄4", "1"]);
+        var draw = draw_axis(document.getElementById('drawing'), planeOptions, test);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black", dasharray: "5,5" }, stroke3 = { color: "black" };
+
+        draw.foreignObject(40, 100).move(15, 40).appendChild("p", { innerText: "`N_{0,3}`" });
+        draw.foreignObject(40, 100).move(35, 80).appendChild("p", { innerText: "`N_{1,3}`" });
+        draw.foreignObject(40, 100).move(120, 80).appendChild("p", { innerText: "`N_{2,3}`" });
+        draw.foreignObject(40, 100).move(215, 70).appendChild("p", { innerText: "`N_{3,3}`" });
+        draw.foreignObject(40, 100).move(275, 80).appendChild("p", { innerText: "`N_{4,3}`" });
+        draw.foreignObject(40, 100).move(355, 80).appendChild("p", { innerText: "`N_{5,3}`" });
+        draw.foreignObject(40, 100).move(405, 40).appendChild("p", { innerText: "`N_{6,3}`" });
+        draw.text('(a)').x(160).y(182);
+
+        for (var i = 0; i < 4; i++) {
+            for (var u = 0; u < 2; u++) {
+                draw.path(NURBSUtils.DrawPathS(3 + 2 * u, 3, U, i, U[3 + u * 2], U[4 + u * 2])).fill("none").stroke(stroke3);
+                draw.path(NURBSUtils.DrawPathS(4 + 2 * u, 3, U, i, U[4 + u * 2], U[5 + u * 2])).fill("none").stroke(stroke2);
+            }
+            draw.line(10 + 100 * i, 180, 10 + 100 * i, 80).stroke(stroke1);
+        }
+        
+    </script>
+
+</body>
+
+</html>

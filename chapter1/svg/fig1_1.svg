@@ -1,0 +1,11 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
+<defs>
+    <marker id="markerArrow" markerWidth="17" markerHeight="7" refX="0" refY="3.5" orient="auto">
+        	<path d="M1,6 L16,3.5 L1,1 L1,6" stroke="black" stroke-width="1" fill="none"/> 
+    </marker>
+</defs>
+	<image xlink:href="../../svg/plane_xy.svg" x="0" y="0" width="480" height="400" />
+    <circle cx="250" cy="250" r="125" stroke="black" stroke-width="1" fill="none"/>
+	<line x1="250" y1="250" x2="327" y2="173" stroke-width="1" stroke="black" marker-end="url(#markerArrow)"/> 
+	<text x="350" y="150" style="font-family: Cambria Math; dominant-baseline: mathematical;">Радиус = 1</text>	
+</svg>

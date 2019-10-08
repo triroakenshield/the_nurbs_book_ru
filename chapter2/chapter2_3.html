@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Производные базисных функций B-сплайнов</title>
+    <link rel="stylesheet" href="../css/Pagestyle.css" />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_CHTML'></script>
+</head>
+
+<body>
+    <div class="header">Глава II</div>
+    <div class="section"><b>2.3.</b> Производные базисных функций B-сплайнов</div>
+
+    <p>Производная базисной функции определяется</p>
+
+    <p class="formula">`N_{i,p}^'=p/{u_{i+p}-u_i}N_{i,p-1}(u)-p/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}(u)`<a name="f2_7"
+            class="nomer">(2.7)</a></p>
+
+    <p>(Смотрите <a href="#img2_8">рисунок 2.8</a> для графической иллюстрации). Докажем это индукцией по `p`. При
+        `p=1`, `N_{i,p-1}` и `N_{i+1,p-1}`, либо 0, либо 1, и, таким образом, `N_{i,p}'` либо</p>
+
+    <a name="img2_8">
+        <object id="svg2_8" data="svg/fig2_8.html" type="image/svg+xml" width="600" height="500"></object>
+        <p class="pictxt">Рисунок 2.8. Рекурсивное определение производных B-сплайнов.</p>
+    </a>
+
+    <p class="formula">`1/{u_{i+1}-u_i}` &emsp; или &emsp; `-1/{u_{i+2}-u_{i+1}}`</p>
+
+    <p>(<a href="chapter2_2.html#img2_5">рис 2.5</a>). Теперь предположим, что <a href="#f2_7">уравнение (2.7)</a> верно для `p-1`,
+        `p>1`. Используя правило продукта `(fg)'=f'g+fg'`, чтобы отличить базисную функцию</p>
+
+    <p class="formula">`N_{i,p}(u)={u-u_i}/{u_{i+p}-u_i}N_{i,p-1}(u)+{u_{i+p+1}-u}/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}(u)`
+    </p>
+
+    <p class="formula">следует &emsp;
+        `N_{i,p}^'=1/{u_{i+p}-u_i}N_{i,p-1}+{u-u_i}/{u_{i+p}-u_i}N_{i,p-1}^'(u)`
+        `-1/{u_{i+p+1}-u_{i+1}}N_{i,p-1}+{u_{i+p+1}-u}/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}^'(u)` <a name="f2_8"
+            class="nomer">(2.8)</a></p>
+
+    <p>Подставляя <a href="#f2_7">(2.7)</a> в <a href="#f2_8">уравнение (2.8)</a> для `N_(i,p-1)^'` и `N_(i+1,p-1)^'`
+        получаем</p>
+
+    <p class="formula2">`N_{i,p}^'=1/{u_{i+p}-u_i}N_{i,p-1}-1/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}`
+        `+{u-u_i}/{u_{i+p}-u_i}({p-1}/{u_{i+p-1]-u_i}N_{i,p-2}-{p-1}/{u_{i+p}-u_{i+1}}N_{i+1,p-2})`
+        `+{u_{i+p+1}-u}/{u_{i+p+1}-u_{i+1}}({p-1}/{u_{i+p}-u_{i+1}}N_{i+1,p-2}-{p-1}/{u_{i+p+1}-u_{i+2})N_{i+2,p-2})`
+    </p>
+    <p class="formula2">&emsp;`=1/{u_{i+p}-u_i}N_{i,p-1}-1/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}`
+        `+{p-1}/{u_{i+p}-u_i}{u-u_i}/{u_{i+p-1}-u_i}N_{i,p-2}`
+        `+{p-1}/{u_{i+p}-u_{i+1}}({u_{i+p+1}-u}/{u_{i+p+1}-u_{i+1}}-{u-u_i}/{u_{i+p}-u_i})N_{i+1,p-2}`
+        `-{p-1}/{u_{i+p+1}-u_{i+1}}{u_{i+p+1}-u_i}/{u_{i+p+1}-u_{i+2}}N_{i+2,p-2}`</p>
+
+    <p>Отметив, что</p>
+
+    <p class="formula2">
+        `{u_{i+p+1}-u}/{u_{i+p+1}-u_{i+2}}-{u-u_i}/{u_{i+p}-u_i}=-1+{u_{i+p+1}-u}/{u_{i+p+1}-u_{i+1}}+1-{u-u_i}/{u_{i+p}-u_i}`
+        `=-{u_{i+p+1}-u_{i+1}}/{u_{i+p+1}-u_{i+1}}+{u_{i+p+1}-u}/{u_{i+p+1}-u_{i+1}}+{u_{i+p}-u_i}/{u_{i+p}-u_i}-{u-u_i}/{u_{i+p}-u_i}`
+        `={u_{i+p}-u_i}/{u_{i+p}-u_i}-{u-u_{i+1}}/{u_{i+p+1}-u_{i+1}}`</p>
+
+    <p>мы получаем</p>
+
+    <p class="formula2">`N_{i,p}^'=1/{u_{i+p}-u_i}N_{i,p-1}-1/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}`
+        `+{p-1}/{u_{i+p}-u_i}({u-u_i}/{u_{i+p-1}-u_i}N_{i,p-2}-{u_{i+p}-u}/{u_{i+p}-u_{i+1}}N_{i+1,p-2})`
+        `-{p-1}/{u_{i+p+1}-u_{i+1}}({u-u_{i+1}}/{u_{i+p}-u_{i+1}}N_{i+1,p-2}-{u_{i+p+1}-u}/{u_{i+p+1}-u_{i+2}}N_{i+2,p-2})`
+    </p>
+
+    <p>По формуле Cox-deBoor (<a href="chapter2_2.html#f2_5">уравнение [2.5]</a>), то выражение в скобках могут быть
+        заменены на `N_{i,p-1}` и `N_{i+1,p-1}`, соответственно. Отсюда следует, что</p>
+
+    <p class="formula2">
+        `N_{i,p}^'=1/{u_{i+p}-u_i}N_{i,p-1}-1/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}`
+        `+{p-1}/{u_{i+p}-u_i}N_{i,p-1}-{p-1}/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}`</p>
+    <p class="formula2">&emsp;`=p/{u_{i+p}-u_i}N_{i,p-1}-p/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}`
+    </p>
+
+    Это завершает доказательство.
+
+    <p>Пусть `N_{i,p}^{(k)}` обозначает `k`ую производную `N_{i,p}(u)`. Повторное дифференцирова&shy;ние
+        <a href="#f2_7">уравнения (2,7)</a> дает общую формулу</p>
+
+    <p class="formula">`N_{i,p}^{(k)}(u)=p({N_{i,p-1}^{(k-1)}}/{u_{i+p}-u_i}-{N_{i+1,p-1}^{(k-1)}}/{u_{i+p+1}-u_{i+1}})`
+        <a name="f2_9" class="nomer">(2.9)</a></p>
+
+    <p><a href="#f2_10">Уравнение (2.10)</a> является еще одним обобщение <a href="#f2_7">уравнения (2.7)</a>. Он
+        вычисляет `k`ую производную `N_{i,p}(u)` в терминах функций `N_{i,p-k},…,N_{i+k,p-k}`</p>
+
+    <p class="formula">`N_{i,p}^{(k)}=p!/{(p-k)!}sum_{j=0}^ka_{k,j}N_{i+j,p-k}`<a name="f2_10" class="nomer">(2.10)</a>
+    </p>
+
+    <p style="margin-left: 110px;">с &emsp; `a_{0,0}=1`</p>
+    <p style="margin-left: 140px;">`a_{k,0}=a_{k-1,0}/{u_{i+p-k+1}-u_i}`</p>
+    <p style="margin-left: 140px;">`a_{k,j}={a_{k-1,j}-a_{k-1,j-1}}/{u_{i+p+j-k+1}-u_{i+j}}` &emsp; `j=1,…,k-1`</p>
+    <p style="margin-left: 140px;">`a_{k,k}={-a_{k-1,k-1}}/{u_{i+p+1}-u_{i+k}}`</p>
+
+    <p>Замечания к <a href="#f2_10">уравнению (2.10)</a></p>
+
+    <ul>
+        <li>`k` не должна превышать `p` (все высшие производные равны нулю);</li>
+        <li>знаменатели, связанные с различными узлами могут обратиться в нуль; в этом случае фактор определяется равным
+            нулю (смотри <a href="chapter2_5.html#ex2_4">Пример2.4</a> и <a href="chapter2_5.html#al2_3">Алгоритм
+                A2.3</a> в <a href="chapter2_5.html">разделе 2.5</a>).</li>
+    </ul>
+
+    <p>Мы опускаем доказательство <a href="#f2_10">уравнения (2.10)</a>, но убедитесь, что оно верно и для `k=1,2`. По
+        определению</p>
+
+    <p class="formula">`a_{1,0}=1/{u_{i+p}-u_i}` &emsp; `a_{1,1}=1/{u_{i+p+1}-u_{i+1}}`</p>
+    <p class="formula">и &emsp; `N_{i,p}^{(1)}=2(a_{1,0}N_{i,p-1]+a_{,1}N_{i+1,p-1})`</p>
+
+    Сравнивая это с <a href="#f2_7">уравнением (2.7)</a> доказывает случай для `k=1`; теперь `k=2`. Дифференцируя <a
+        href="#f2_7">уравнение (2.7)</a> дает
+
+    <p class="formula2">`N_{i,p}^{(2)}=p/{u_{i+p}-u_i}N_{i,p-1}^{(1)}-p/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}^{(1)}`
+        `=p/{u_{i+p}-u_i}({p-1}/{u_{i+p-1}-u_i}N_{i,p-2}-{p-1}/{u_{i+p}-u_{i+1}}N_{i+1,p-2})`
+        `-p/{u_{i+p+1}-u_{i+1}}({p-1}/{u_{i+p}-u_{i+1}}N_{i+1,p-2}-{p-1}/{u_{i+p+1}-u_{i+2}}N_{i+2,p-2})`
+        `=p(p-1)[{a_{1,0}}/{u_{i+p-1}-u_i}N_{i,p-2}`
+        `-1/{u_{i+p}-u_{i+1}}(1/{u_{i+p}-u_i}+1/{u_{i+p+1}-u_{i+1}})N_{i+1,p-2}`
+        `+a_{1,1}/{u_{i+p+1}-u_{i+2}}N_{i+2,p-2}]`
+        `=p(p-1)(a_{2,0}N_{i,p-2}+(a_{1,1}-a_{1,0})/{u_{i+p}-u_{i+1}}N_{i+1,p-2}+a_2,2 N_{i+2,p-2)}`</p>
+
+
+    Отметив, что `k=2` и
+
+    <p class="formula">`a_{2,1}={a_{1,1}-a_{1,0}}/{u_{i+p}-u_{i+1}}`</p>
+
+    отсюда следует, что
+
+    <p class="formula">`N_{i,p}^{(2)}(u)=2sum_{j=0}^2a_{2,j}N_{i+j,p-2}(u)`</p>
+
+    <p>Для полноты изложения приведем еще одну формулу для вычисления производных от базисных функций B-сплайнов</p>
+
+    <p class="formula">
+        `N_{i,p}^{(k)}=p/{p-k}({u-u_i}/{u_{i+p}-u_i}N_{i,p-1}^{(k)}+{u_{i+p+1}-u}/{u_{i+p+1}-u_{i+1}}N_{i+1,p-1}^{(k)})`
+        &emsp; `k=0,...,p-1`<a name="f2_11" class="nomer">(2.11)</a></p>
+
+    <a href="#f2_11">Уравнение (2.11)</a> дает `k`ую производную от `N_{i,p}(u)` в терминах `k`-ой производной
+    `N_{i,p-1}` и `N_{(i+1,p-1}`.
+
+    <p>На <a href="#img2_9b">рис 2.9b</a> и <a href="#img2_10d">2.10d</a> показаны производные, соответствующие базисным
+        функциям на <a href="#img2_9a">рис 2.9а</a> и <a href="#img2_10a">2.10а</a>. <a href="#img2_11">Рисунок 2.11</a>
+        показывает все ненулевые производные `N_{i,3}`. Обрати&shy;те внимание на эффект нескольких узлов на
+        <a href="#img2_10b">рисунке 2.10б</a>; `N_{6,3}^'` имеет скачок в тройной узел.</p>
+
+    <a name="img2_9a">
+        <object id="svg2_9a" data="svg/fig2_9a.html" type="image/svg+xml" width="540" height="240"></object>
+    </a>
+
+    <a name="img2_9b">
+        <object id="svg2_9b" data="svg/fig2_9b.html" type="image/svg+xml" width="540" height="380"></object>
+        <p class="pictxt">Рисунок 2.9. (а) Кубические базисные функции; (б) производные, соответствующие базисным
+            функциям на рисунке 2.9а.</p>
+    </a>
+
+    <a name="img2_10a">
+        <object id="svg2_10a" data="svg/fig2_10a.html" type="image/svg+xml" width="540" height="240"></object>
+    </a>
+
+    <a name="img2_10b">
+        <object id="svg2_10b" data="svg/fig2_10b.html" type="image/svg+xml" width="540" height="370"></object>
+        <p class="pictxt">Рисунок 2.10. (а) Кубические базисные функции, показывающие одиночные, двойные и тройные узлы;
+            (б) Производные функций на рисунке 2.10а.</p>
+    </a>
+
+    <a name="img2_11">
+        <object id="svg2_11" data="svg/fig2_11.html" type="image/svg+xml" width="600" height="440"></object>
+        <p class="pictxt">Рисунок 2.11. `N_{i,3}` и все его ненулевые производные.</p>
+    </a>
+
+    <footer>
+        <a href="chapter2_2.html">Назад</a>
+        <a href="..\сontents.html">Содержание</a>
+        <a href="chapter2_4.html">Вперёд</a>
+    </footer>
+</body>
+
+</html>

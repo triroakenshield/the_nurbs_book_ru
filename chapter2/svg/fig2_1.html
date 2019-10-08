@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig2_1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var draw = SVG(document.getElementById('drawing')).size(590, 300);
+
+        var stroke1 = { width: 1 }, test = ['`u_0=0`', '`u_1`', '`u_2`', '`u_3=1`'];
+        var markerArrow = draw.marker(17, 7, function (add) { add.path("M1,6 L16,3.5 L1,1 L1,6").fill("none").stroke(stroke1); }).ref(0, 3.5);
+
+        draw.line(10, 270, 570, 270).stroke(stroke1).marker("end", markerArrow);
+
+        for (var i = 0; i < 4; i++) {
+            draw.line(10 + 150 * i, 265, 10 + 150 * i, 275).stroke(stroke1);
+            draw.foreignObject(80, 40).move(5 + 150 * i, 260).appendChild("p", { innerText: test[i] });
+        }
+
+        draw.circle(6).move(10 - 3, 140 - 3).fill('none').stroke(stroke1);
+        draw.circle(6).move(140 - 3, 90 - 3).fill('none').stroke(stroke1);
+        draw.circle(6).move(270 - 3, 210 - 3).fill('none').stroke(stroke1);
+        draw.circle(6).move(460 - 3, 150 - 3).fill('none').stroke(stroke1);
+
+        draw.line(10, 250, 10, 170).stroke(stroke1).marker("end", markerArrow); 
+        draw.line(160, 250, 144, 130).stroke(stroke1).marker("end", markerArrow);
+        draw.line(310, 250, 290, 235).stroke(stroke1).marker("end", markerArrow); 
+        draw.line(460, 250, 460, 180).stroke(stroke1).marker("end", markerArrow);
+
+        draw.path('M10 140 C 50 60 90 60 140 90').fill('none').stroke(stroke1);     
+        draw.path('M140 90 C 190 120 220 170 270 210').fill('none').stroke(stroke1);
+        draw.path('M270 210 C 330 240 390 240 460 150').fill('none').stroke(stroke1);
+
+        draw.foreignObject(80, 40).move(60, 30).appendChild("p", { innerText: '`C_1(u)`' });
+        draw.foreignObject(80, 40).move(210, 100).appendChild("p", { innerText: '`C_2(u)`' });
+        draw.foreignObject(80, 40).move(360, 160).appendChild("p", { innerText: '`C_3(u)`' });
+    </script>
+
+</body>
+
+</html>

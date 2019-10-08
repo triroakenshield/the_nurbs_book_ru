@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig1_18b</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+</head>
+
+<body>
+    <div id="drawing"></div>
+
+    <script>
+        function DrawPath(p, U, P, su, eu) {
+            var sstring = "M", step = 100, C;
+            for (var i = su * step; i <= eu * step; i++) {
+                C = NURBSUtils.calcBSplinePoint(p, U, P, i / step);
+                if (C.w != 1.0) {
+                    C.divideScalar(C.w);
+                }
+                sstring = sstring.concat(C.x, " ", C.y, " ");
+            }
+            return sstring;
+        }
+
+        var U = [0, 0, 0, 0, 1, 1, 1, 1];
+        var P = [new THREE.Vector4(30, 170, 0, 1), new THREE.Vector4(80, 30, 0, 3), new THREE.Vector4(280, 30, 0, 7),
+        new THREE.Vector4(330, 170, 0, 1)];
+
+        var p = 3;
+
+        var draw = SVG(document.getElementById('drawing')).size(400, 200);
+
+        draw.foreignObject(80, 40).move(40, 140).appendChild("p", { innerText: "`P_0`" });
+        draw.foreignObject(80, 40).move(50, 10).appendChild("p", { innerText: "`P_1`" });
+        draw.foreignObject(80, 40).move(290, 10).appendChild("p", { innerText: "`P_2`" });
+        draw.foreignObject(80, 40).move(305, 140).appendChild("p", { innerText: "`P_3`" });
+        draw.foreignObject(80, 40).move(20, 160).appendChild("p", { innerText: "`w_0=1`" });
+        draw.foreignObject(80, 40).move(30, -10).appendChild("p", { innerText: "`w_1=3`" });
+        draw.foreignObject(80, 40).move(280, -10).appendChild("p", { innerText: "`w_2=7`" });
+        draw.foreignObject(80, 40).move(310, 160).appendChild("p", { innerText: "`w_3=1`" });
+
+        var sstring = "M";
+
+        for (var i = 0; i < 4; i++) {
+            draw.circle(6).move(P[i].x - 3, P[i].y - 3).fill('none').stroke({ width: 1 });
+            sstring = sstring.concat(P[i].x, " ", P[i].y, " ");
+        }
+
+        draw.path(sstring).fill("none").stroke({ color: "black" });
+
+        var C;
+        for (var j = 4; j < 7; j++) {
+            C = NURBSUtils.calcBSplinePoint(p, U, P, U[j]);
+            if (C.w != 1.0) {
+                C.divideScalar(C.w);
+            }
+            draw.circle(4).move(C.x - 2, C.y - 2).stroke({ width: 1 });
+        }
+
+        draw.path(DrawPath(p, U, P, 0, 1)).fill("none").stroke({ color: "black" });
+
+        draw.text('(b)').x(140).y(170);
+    </script>
+
+</body>
+
+</html>

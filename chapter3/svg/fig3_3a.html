@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig3_3a</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0.2, 0.4, 0.6, 0.8, 1, 1, 1];
+        var test = make_Ulegend(U, ["0", "1⁄5", "2⁄5", "3⁄5", "4⁄5", "1"]);
+        planeOptions.svgWidth = 590;
+        planeOptions.hscale = 500;
+        var draw = draw_axis(document.getElementById('drawing'), planeOptions, test);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black", dasharray: "5,5" }, stroke3 = { color: "black" };
+
+        draw.foreignObject(40, 100).move(15, 40).appendChild("p", { innerText: "`N_{0,2}`" });
+        draw.foreignObject(40, 100).move(55, 70).appendChild("p", { innerText: "`N_{1,2}`" });
+        draw.foreignObject(40, 100).move(145, 60).appendChild("p", { innerText: "`N_{2,2}`" });
+        draw.foreignObject(40, 100).move(245, 60).appendChild("p", { innerText: "`N_{3,2}`" });
+        draw.foreignObject(40, 100).move(345, 60).appendChild("p", { innerText: "`N_{4,2}`" });
+        draw.foreignObject(40, 100).move(435, 70).appendChild("p", { innerText: "`N_{5,2}`" });
+        draw.foreignObject(40, 100).move(505, 45).appendChild("p", { innerText: "`N_{6,2}`" });
+
+        draw.text('(a)').x(160).y(182);
+
+        for (var i = 0; i < 5; i++) {
+            for (var u = 0; u < 2; u++) {
+                draw.path(NURBSUtils.DrawPathS(2 + 2 * u, 2, U, i, u * 0.4, u * 0.4 + 0.2)).fill("none").stroke(stroke3);
+                draw.path(NURBSUtils.DrawPathS(3 + 2 * u, 2, U, i, u * 0.4 + 0.2, u * 0.4 + 0.4)).fill("none").stroke(stroke2);
+            }
+            draw.path(NURBSUtils.DrawPathS(6, 2, U, i, 0.8, 1)).fill("none").stroke(stroke3);
+            draw.line(10 + 100 * i, 180, 10 + 100 * i, 80).stroke(stroke1);
+        }
+
+    </script>
+</body>
+
+</html>

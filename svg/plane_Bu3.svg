@@ -1,0 +1,28 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="290" height="150">>  
+<defs>
+    <marker id="markerArrow" markerWidth="17" markerHeight="7" refX="0" refY="3.5" orient="auto">
+        	<path d="M1,6 L16,3.5 L1,1 L1,6" stroke="black" stroke-width="1" fill="none"/> 
+    </marker>
+</defs>
+	<line x1="10" y1="130" x2="250" y2="130" stroke-width="1" stroke="black" marker-end="url(#markerArrow)"/>  
+	<line x1="10" y1="130" x2="10" y2="20" stroke-width="1" stroke="black" marker-end="url(#markerArrow)"/>
+    <line x1="10" y1="125" x2="10" y2="135" stroke-width="1" stroke="black" />
+    <line x1="7" y1="125" x2="7" y2="135" stroke-width="1" stroke="black" />
+    <line x1="13" y1="125" x2="13" y2="135" stroke-width="1" stroke="black" />
+    <line x1="50" y1="125" x2="50" y2="135" stroke-width="1" stroke="black" />
+    <line x1="90" y1="125" x2="90" y2="135" stroke-width="1" stroke="black" />
+    <line x1="130" y1="125" x2="130" y2="135" stroke-width="1" stroke="black" />
+    <line x1="168" y1="125" x2="168" y2="135" stroke-width="1" stroke="black" />
+    <line x1="172" y1="125" x2="172" y2="135" stroke-width="1" stroke="black" />
+    <line x1="210" y1="125" x2="210" y2="135" stroke-width="1" stroke="black" />
+    <line x1="207" y1="125" x2="207" y2="135" stroke-width="1" stroke="black" />
+    <line x1="213" y1="125" x2="213" y2="135" stroke-width="1" stroke="black" />
+    <line x1="5" y1="90" x2="15" y2="90" stroke-width="1" stroke="black" />
+    <text x="0" y="85">1</text>
+    <text x="5" y="148">0</text>
+    <text x="45" y="148">1</text>
+    <text x="85" y="148">2</text>
+    <text x="125" y="148">3</text>
+    <text x="165" y="148">4</text>
+    <text x="205" y="148">5</text>
+</svg>  

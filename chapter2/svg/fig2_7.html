@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig2_7</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 1, 2, 3, 4];
+        var test = make_Ulegend(U, ["0", "1", "2", "3", "4"]);
+        planeOptions.svgWidth = 490;
+        planeOptions.svgHeight = 280;
+        planeOptions.zero_y = 220;
+        planeOptions.hscale = 100;
+        planeOptions.vscale = 130;
+        var draw = draw_axis(document.getElementById('drawing'), planeOptions, test);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black", dasharray: "5,5" }, stroke3 = { color: "black" };
+
+        function DrawPath1(fu, su, eu) {
+            var sstring = "M", u, x, step = 10;
+            for (var i = su * step; i <= eu * step; i++) {
+                u = i / step;
+                x = fu(u);
+                sstring = sstring.concat(planeOptions.zero_x + planeOptions.hscale * u, " ", planeOptions.zero_y - planeOptions.vscale * (x), " ");
+            }
+            return sstring;
+        }
+
+        draw.foreignObject(140, 60).move(75, 120).appendChild("p", { innerText: "`1/2(u-1)^2`" });
+        draw.foreignObject(140, 60).move(210, 220).appendChild("p", { innerText: "`-11/2+5u-u^2`" });
+        draw.foreignObject(140, 60).move(375, 120).appendChild("p", { innerText: "`1/2(4-u)^2`" });
+
+        var strk;
+        for (var k = 0; k < 3; k++) {
+            if (k == 1) strk = stroke3;
+            else strk = stroke2;
+
+            draw.path(DrawPath1(function (u) { return 0.5 * (u - 1) * (u - 1); }, k, k+1)).fill("none").stroke(strk);
+            draw.path(DrawPath1(function (u) { return -5.5 + 5 * u - u * u; }, k+1, k+2)).fill("none").stroke(strk);
+            draw.path(DrawPath1(function (u) { return 0.5 * (4 - u) * (4 - u); },k+2, k+3)).fill("none").stroke(strk);
+        }
+
+    </script>
+
+</body>
+
+</html>

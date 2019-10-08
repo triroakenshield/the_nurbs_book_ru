@@ -1,0 +1,31 @@
+   body {
+	width: 800px;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+	counter-reset: heading;
+   }   
+   h1 {
+    text-align: right;
+    border-top: 1px solid; /* Линия сверху текста */
+    border-bottom: 1px solid; /* Линия снизу текста */
+    padding: 5px; /* Поля вокруг текста */
+   }
+   h2:before {
+    counter-increment: heading; /* Указываем идентификатор счетчика */
+    content: "Глава " counter(heading, upper-roman) ". "; /* Выводим текст перед содержимым тега <h2> */
+   }
+   ol { 
+    list-style-type: none;
+    counter-reset: list2; } /* Инициируем счетчик вложенного списка */
+   ol li:before {
+    counter-increment: list2; /* Увеличиваем значение счетчика вложенного списка */
+    content:  counter(heading) "." counter(list2) ". "; /* Выводим число */
+   }
+   ol ol { 
+    list-style-type: none;
+    counter-reset: list3; } /* Инициируем счетчик вложенного списка */
+   ol ol li:before {
+    counter-increment: list3; /* Увеличиваем значение счетчика вложенного списка */
+    content:  counter(heading) "." counter(list2) "." counter(list3) ". "; /* Выводим число */
+   }

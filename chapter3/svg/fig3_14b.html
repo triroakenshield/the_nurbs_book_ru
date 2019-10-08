@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig3_14b</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG">    </script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0, 0.5, 0.5, 1, 1, 1, 1];
+        var P = [new THREE.Vector2(70, 170), new THREE.Vector2(40, 60), new THREE.Vector2(140, 30), new THREE.Vector2(140, 30),
+        new THREE.Vector2(240, 60), new THREE.Vector2(210, 170)];
+        var p = 3;
+
+        var draw = SVG(document.getElementById('drawing')).size(400, 200);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black", dasharray: "5,5" }, stroke3 = { color: "black" };
+
+        draw.foreignObject(80, 40).move(75, 150).appendChild("p", { innerText: "`P_0`" });
+        draw.foreignObject(80, 40).move(20, 40).appendChild("p", { innerText: "`P_1`" });
+        draw.foreignObject(80, 40).move(110, -10).appendChild("p", { innerText: "`P_2=P_3`" });
+        draw.foreignObject(80, 40).move(250, 40).appendChild("p", { innerText: "`P_4`" });
+        draw.foreignObject(80, 40).move(215, 150).appendChild("p", { innerText: "`P_5`" });
+
+        var sstring = "M", C;
+
+        for (var i = 0; i < 6; i++) {
+            draw.circle(6).move(P[i].x - 3, P[i].y - 3).fill('none').stroke(stroke1);
+            sstring = sstring.concat(P[i].x, " ", P[i].y, " ");
+        }
+
+        for (var j = 4; j < 6; j++) {
+            C = NURBSUtils.calcBSplinePoint1(p, U, P, U[j]);
+            draw.circle(4).move(C.x - 2, C.y - 2).stroke(stroke1);
+        }
+
+        draw.path(sstring).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(p, U, P, 0, 1)).fill("none").stroke(stroke3);
+
+        draw.text('(b)').x(135).y(170);
+
+    </script>
+
+</body>
+
+</html>

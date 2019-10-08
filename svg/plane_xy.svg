@@ -1,0 +1,11 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="480" height="400">  
+<defs>
+    <marker id="markerArrow" markerWidth="17" markerHeight="7" refX="0" refY="3.5" orient="auto">
+        	<path d="M1,6 L16,3.5 L1,1 L1,6" stroke="black" stroke-width="1" fill="none"/> 
+    </marker>
+</defs>
+	<line x1="50" y1="250" x2="450" y2="250" stroke-width="1" stroke="black" marker-end="url(#markerArrow)"/>  
+	<line x1="250" y1="450" x2="250" y2="50" stroke-width="1" stroke="black" marker-end="url(#markerArrow)"/>
+	<text x="470" y="250" style="font-family: Cambria Math; dominant-baseline: mathematical;">x</text>	
+	<text x="250" y="20" style="font-family: Cambria Math; dominant-baseline: mathematical;">y</text>	
+</svg>  
